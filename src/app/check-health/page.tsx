@@ -16,12 +16,12 @@ export default function Page() {
             link: "https://github.com/facebook/react" 
         },
         {
-            name: "Tensorflow",
-            link: "https://github.com/tensorflow/tensorflow",
-        },
-        {
             name: "VS Code",
             link: "https://github.com/microsoft/vscode",
+        },
+        {
+            name: "Tensorflow",
+            link: "https://github.com/tensorflow/tensorflow",
         },
         { name: "Django", link: "https://github.com/django/django" },
         {
@@ -33,6 +33,10 @@ export default function Page() {
     const mediumQualityRepos = [
         { name: "jQuery", link: "https://github.com/jquery/jquery" },
         {
+            name: "Bootstrap",
+            link: "https://github.com/twbs/bootstrap",
+        },
+        {
             name: "Moment.js",
             link: "https://github.com/moment/moment",
         },
@@ -40,15 +44,12 @@ export default function Page() {
             name: "Three.js",
             link: "https://github.com/mrdoob/three.js",
         },
-        {
-            name: "Bootstrap",
-            link: "https://github.com/twbs/bootstrap",
-        },
         { name: "Lodash", link: "https://github.com/lodash/lodash" },
     ];
 
     const lowQualityRepos = [
         { name: "Flask", link: "https://github.com/pallets/flask" },
+        { name: "Day.js", link: "https://github.com/iamkun/dayjs" },
         {
             name: "DevConnector Django",
             link: "https://github.com/devmahmud/DevConnector-Django",
@@ -62,7 +63,6 @@ export default function Page() {
             name: "Nano ID",
             link: "https://github.com/ai/nanoid",
         },
-        { name: "Day.js", link: "https://github.com/iamkun/dayjs" },
     ];
 
     const Section = ({ title, subtitle, repos }: SectionProps) => (
@@ -73,17 +73,32 @@ export default function Page() {
             <p className="text-sm text-gray-500 mb-4">{subtitle}</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {repos.map((repo,index) => (
-                    <div key={index} className="p-4 border border-gray-200 rounded-lg bg-gray-50" >
+                {repos.map((repo, index) => (
+                    <div
+                        key={index}
+                        className="p-4 border border-gray-200 rounded-lg bg-gray-50"
+                    >
                         <p className="text-gray-800 font-medium mb-2">
                             {repo.name}
                         </p>
 
                         <div className="navigation-links flex justify-between">
-                            <Link href={repo.link} target="_blank"  className="text-sm text-blue-600 hover:underline" >
+                            <Link
+                                href={repo.link}
+                                target="_blank"
+                                className="text-sm text-blue-600 hover:underline"
+                            >
                                 View Repo →
                             </Link>
-                            {index === 0 && ( <Link href={`/check-health/manual-review/${(repo.name)}`}  className="text-sm text-blue-600 hover:underline" > Manual Review → </Link> )}
+                            {(index === 0 || index === 1) && (
+                                <Link
+                                    href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                    className="text-sm text-blue-600 hover:underline"
+                                >
+                                    {" "}
+                                    Manual Review →{" "}
+                                </Link>
+                            )}
                         </div>
                     </div>
                 ))}

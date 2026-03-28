@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default async function ManualReview({params}:{params:Promise<{id:string}>}){
-    const {id} = await params;
-    
+    let {id} = await params;
+    id = decodeURIComponent(id).replace(/\+/g, ' ');
     const reactConstants = [
         {label:'Code Quality',weight:'20',score:'9',justification:'Highly modular, well-structured, industry standard'},
         {label:'Documentation',weight:'15',score:'10',justification:'Extensive docs, tutorials, contribution guides'},
@@ -64,10 +64,64 @@ export default async function ManualReview({params}:{params:Promise<{id:string}>
 
     const flaskLink = "pallets/flask";
 
-    const constants = (id === 'React' ? reactConstants : id === 'jQuery' ? jQueryConstants : flaskConstants)
-    const score = id === "React" ? reactScore : id === 'jQuery' ? jQueryScore : flaskScore;
-    const interpretation = id === "React" ? reactInterpretation : id === 'jQuery' ? jQueryInterpretation : flaskInterpretation;
-    const github = id === "React" ? reactLink : id === 'jQuery' ? jQueryLink : flaskLink;
+    const vsCodeConstants = [
+        {label:'Code Quality',weight:'20',score:'9',justification:'Highly modular, enterprise-level architecture'},
+        {label:'Documentation',weight:'15',score:'9',justification:'Extensive docs, guides, and contribution resources'},
+        {label:'Commit Activity',weight:'15',score:'10',justification:'Very frequent and continuous development'},
+        {label:'Issue Management',weight:'10',score:'9',justification:'Well-structured issue tracking with active triaging'},
+        {label:'Pull Requests',weight:'10',score:'9',justification:'Strong review process and collaboration'},
+        {label:'Testing',weight:'10',score:'9',justification:'Robust testing and CI/CD integration'},
+        {label:'Contributors',weight:'10',score:'10',justification:'Very large and active contributor community'},
+        {label:'Maintainability',weight:'10',score:'9',justification:'Long-term evolution with regular updates'}
+    ];
+    const vsCodeScore = 9.2;
+    const vsCodeInterpretation = [
+        "Extremely active development lifecycle",
+        "Strong engineering practices and testing",
+        "Excellent community and contributor engagement.",
+    ];
+    const vsCodeLink = "microsoft/vscode";
+
+    const bootstrapConstants = [
+        {label:'Code Quality',weight:'20',score:'8',justification:'Well-structured and modular CSS/JS framework'},
+        {label:'Documentation',weight:'15',score:'9',justification:'Excellent documentation with examples and guides'},
+        {label:'Commit Activity',weight:'15',score:'8',justification:'Active but less frequent than top-tier projects'},
+        {label:'Issue Management',weight:'10',score:'7',justification:'High number of issues; managed but slower at scale'},
+        {label:'Pull Requests',weight:'10',score:'8',justification:'Active contribution and review process'},
+        {label:'Testing',weight:'10',score:'7',justification:'Testing exists but less extensive than large systems'},
+        {label:'Contributors',weight:'10',score:'9',justification:'Large and active contributor base'},
+        {label:'Maintainability',weight:'10',score:'8',justification:'Stable and widely maintained framework'}
+    ]
+    const bootstrapScore = 8.1;
+    const bootstrapInterpretation = [
+        "Strong documentation and usability",
+        "Large contributor base and community support",
+        "High popularity can align with high health, but with scalability challenges",
+    ];
+    const bootstrapLink = "twbs/bootstrap";
+
+    const dayJsConstants = [
+        {label:'Code Quality',weight:'20',score:'9',justification:'Clean, minimalistic, and highly modular design'},
+        {label:'Documentation',weight:'15',score:'8',justification:'Clear and concise documentation, though less extensive than larger frameworks'},
+        {label:'Commit Activity',weight:'15',score:'7',justification:'Moderate but consistent updates'},
+        {label:'Issue Management',weight:'10',score:'8',justification:'Issues are tracked and reasonably well managed'},
+        {label:'Pull Requests',weight:'10',score:'8',justification:'Active contributions with structured review process'},
+        {label:'Testing',weight:'10',score:'8',justification:'Good testing coverage for a lightweight library'},
+        {label:'Contributors',weight:'10',score:'7',justification:'Moderate contributor base'},
+        {label:'Maintainability',weight:'10',score:'9',justification:'High maintainability due to simplicity and focused scope'}
+    ];
+    const dayJsScore = 8.0;
+    const dayJsInterpretation = [
+        "Strong code quality and maintainability",
+        "Efficient design with focused functionality",
+        "Smaller repositories can still achieve high project health through simplicity and good design",
+    ];
+    const dayJsLink = "iamkun/dayjs";
+
+    const constants = (id === 'React' ? reactConstants : id === 'jQuery' ? jQueryConstants : id === 'Flask' ? flaskConstants : id === 'VS Code' ? vsCodeConstants : id === 'Bootstrap' ? bootstrapConstants : id === 'Day.js' ? dayJsConstants : []);
+    const score = id === "React" ? reactScore : id === 'jQuery' ? jQueryScore : id === 'Flask' ? flaskScore : id === 'VS Code' ? vsCodeScore : id === 'Bootstrap' ? bootstrapScore : id === 'Day.js' ? dayJsScore : 0;
+    const interpretation = id === "React" ? reactInterpretation : id === 'jQuery' ? jQueryInterpretation : id === 'Flask' ? flaskInterpretation : id === 'VS Code' ? vsCodeInterpretation : id === 'Bootstrap' ? bootstrapInterpretation : id === 'Day.js' ? dayJsInterpretation : [];
+    const github = id === "React" ? reactLink : id === 'jQuery' ? jQueryLink : id === 'Flask' ? flaskLink : id === 'VS Code' ? vsCodeLink : id === 'Bootstrap' ? bootstrapLink : id === 'Day.js' ? dayJsLink : '';
     
     return (
         <>
@@ -77,7 +131,7 @@ export default async function ManualReview({params}:{params:Promise<{id:string}>
                         <h1 className="text-2xl font-semibold text-gray-800">
                             Manual Qualitative Review of{" "}
                             <span className="text-blue-400">
-                                {id}
+                                {decodeURIComponent(id).replace(/\+/g, ' ')}
                             </span>{" "}
                             Repository
                         </h1>
@@ -86,7 +140,7 @@ export default async function ManualReview({params}:{params:Promise<{id:string}>
                             Each factor is assessed individually in the detailed manual scores section, based on predefined weights. 
                             The final weighted score is then calculated to provide an overall evaluation. 
                             An interpretation is included to explain what the final score means in terms of repository quality and maintainability.
-                            <Link className='text-blue-500 cursor-pointer' target="_blank" href={`https://github.com/${github}`}> See Repo here  →</Link>
+                            <Link className='text-blue-500 cursor-pointer hover:underline' target="_blank" href={`https://github.com/${github}`}> See Repo here  →</Link>
                         </p>
                     </div>
 
@@ -220,7 +274,7 @@ export default async function ManualReview({params}:{params:Promise<{id:string}>
                                 <ul className="list-disc">
                                     {interpretation.map(
                                         (item, index) => (
-                                            <li key={index}>
+                                            <li key={index} className={index === 2 ? "font-semibold" : ""}>
                                                 {item}
                                             </li>
                                         ),
