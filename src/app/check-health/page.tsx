@@ -88,16 +88,32 @@ export default function Page() {
                                 target="_blank"
                                 className="text-sm text-blue-600 hover:underline"
                             >
-                                View Repo →
+                                View Repo 
                             </Link>
                             {(index === 0 || index === 1) && (
-                                <Link
-                                    href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
-                                    className="text-sm text-blue-600 hover:underline"
-                                >
-                                    {" "}
-                                    Manual Review →{" "}
-                                </Link>
+                                <div className="flex gap-2">
+                                    <Link
+                                        href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                        className="text-sm text-blue-600 hover:underline"
+                                    >
+                                        {" "}
+                                        Manual Review 
+                                    </Link>
+                                    <Link
+                                        href={`/check-health/api-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                        className="text-sm text-blue-600 hover:underline"
+                                    >
+                                        {" "}
+                                        Api Review
+                                    </Link>
+                                    <Link
+                                        href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                        className="text-sm text-blue-600 hover:underline"
+                                    >
+                                        {" "}
+                                        Final Review 
+                                    </Link>
+                                </div>
                             )}
                         </div>
                     </div>
