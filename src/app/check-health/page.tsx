@@ -72,7 +72,7 @@ export default function Page() {
             </h2>
             <p className="text-sm text-gray-500 mb-4">{subtitle}</p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                 {repos.map((repo, index) => (
                     <div
                         key={index}
@@ -82,34 +82,23 @@ export default function Page() {
                             {repo.name}
                         </p>
 
-                        <div className="navigation-links flex justify-between">
-                            <Link
-                                href={repo.link}
-                                target="_blank"
-                                className="text-sm text-blue-600 hover:underline"
-                            >
+                        <div className="navigation-links flex gap-4">
+                            <Link  href={repo.link} target="_blank" className="text-sm text-blue-600 hover:underline">
                                 View Repo 
                             </Link>
                             {(index === 0 || index === 1) && (
                                 <div className="flex gap-2">
-                                    <Link
-                                        href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
-                                        className="text-sm text-blue-600 hover:underline"
-                                    >
+                                    <Link href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`} className="text-sm text-blue-600 hover:underline" >
                                         {" "}
                                         Manual Review 
                                     </Link>
-                                    <Link
-                                        href={`/check-health/api-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
-                                        className="text-sm text-blue-600 hover:underline"
-                                    >
+                                    <Link href={`/check-health/api-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                        className="text-sm text-blue-600 hover:underline" >
                                         {" "}
                                         Api Review
                                     </Link>
                                     <Link
-                                        href={`/check-health/final-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
-                                        className="text-sm text-blue-600 hover:underline"
-                                    >
+                                        href={`/check-health/final-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`} className="text-sm text-blue-600 hover:underline" >
                                         {" "}
                                         Final Review 
                                     </Link>

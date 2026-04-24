@@ -30,8 +30,8 @@ export default function Banner() {
                 </p>
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 hover:brightness-110"
-                        style={{ backgroundColor: "#865EC3" }} > Read More </button>
+                    <Link href={'https://github.com/Visalraj/Repository-Health-Check-App'} target="_blank"><button className="px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 hover:brightness-110"
+                        style={{ backgroundColor: "#865EC3" }} > Read More </button></Link>
                     <Link href={'/check-health'}><button className="px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 hover:brightness-110"
                         style={{ backgroundColor: "#17AA5C" }} >  Get Started </button></Link>
                 </div>
