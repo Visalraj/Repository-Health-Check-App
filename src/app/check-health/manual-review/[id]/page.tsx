@@ -98,7 +98,7 @@ export default async function ManualReview({params}:{params:Promise<{id:string}>
         "Large contributor base and community support",
         "High popularity can align with high health, but with scalability challenges",
     ];
-    const bootstrapLink = "twbs/bootstrap";
+    const bootstrapLink = "twbs/bootstrap"; 
 
     const dayJsConstants = [
         {label:'Code Quality',weight:'20',score:'9',justification:'Clean, minimalistic, and highly modular design'},

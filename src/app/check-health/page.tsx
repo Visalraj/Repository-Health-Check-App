@@ -107,7 +107,7 @@ export default function Page() {
                                         Api Review
                                     </Link>
                                     <Link
-                                        href={`/check-health/manual-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
+                                        href={`/check-health/final-review/${encodeURIComponent(repo.name.trim()).replace(/%20/g, "+")}`}
                                         className="text-sm text-blue-600 hover:underline"
                                     >
                                         {" "}

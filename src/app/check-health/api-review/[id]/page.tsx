@@ -32,18 +32,15 @@ export default function Page({
 }: {
     params: Promise<{ id: string }>;
 }) {
-    const resolvedParams = use(params); // ✅ unwrap
-    const id = decodeURIComponent(resolvedParams.id).replace(
-        /\+/g,
-        " ",
-    );
+    const resolvedParams = use(params); 
+    const id = decodeURIComponent(resolvedParams.id).replace(  /\+/g, " ",);
 
     const [data, setData] = useState<GitHubRepoResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const repoMap: Record<string, string> = {
         React: "facebook/react",
-        Bootstrap: "lodash/lodash",
+        Bootstrap: "twbs/bootstrap",
         Flask: "pallets/flask",
         "Day.js": "iamkun/dayjs",
         "VS Code": "microsoft/vscode",

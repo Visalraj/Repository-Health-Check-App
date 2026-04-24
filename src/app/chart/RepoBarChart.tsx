@@ -77,6 +77,18 @@ export default function RepoBarChart({ scores, repoName }: Props) {
         ],
     };
 
+    const repoMap: Record<string, string> = {
+        "facebook/react": "React",
+        "twbs/bootstrap": "Bootstrap",
+        "pallets/flask": "Flask",
+        "iamkun/dayjs": "Day.js",
+        "microsoft/vscode": "VS Code",
+        "jquery/jquery": "jQuery",
+    };
+
+    const repoLabel = repoMap[repoName];
+
+
     const options = {
         responsive: true,
         plugins: {
@@ -85,19 +97,18 @@ export default function RepoBarChart({ scores, repoName }: Props) {
             },
             title: {
                 display: true,
-                text: `${(repoName).toUpperCase()} - Quantative Review Scores Using Github Api Data`,
+                text: `${repoLabel} - Quantative Review Scores Using Github Api Data`,
             },
         },
         scales: {
             y: {
                 min: 0,
-                max: 10,
+                max: 12,
                 ticks: {
                     stepSize: 1,
                 },
             },
         },
     };
-
     return <Bar data={data} options={options} />;
 }
